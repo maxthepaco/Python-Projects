@@ -7,6 +7,8 @@ html_content = response.text
 
 soup = BeautifulSoup(html_content, 'html5lib')
 
-contents = soup.find_all('tr')
+tableContent = soup.find_all(class_='c0')
 
-print(contents)
+del tableContent[0]
+
+print(tableContent[0])
