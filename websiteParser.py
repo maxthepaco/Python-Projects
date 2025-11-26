@@ -5,5 +5,9 @@ url = "https://docs.google.com/document/d/e/2PACX-1vRPzbNQcx5UriHSbZ-9vmsTow_R6R
 response = requests.get(url)
 html_content = response.text
 
-soup = BeautifulSoup(html_content, 'html.paser')
+soup = BeautifulSoup(html_content, 'html5lib')
 
+contents = soup.find_all('td')
+
+for content in contents:
+    print(contents.get('tr'))
