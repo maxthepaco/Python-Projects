@@ -9,8 +9,6 @@ soup = BeautifulSoup(html_content, 'html5lib')
 
 tableContent = soup.select('p')
 
-#print(tableContent)
-
 def stripTags(item):
     return item.get_text(" ", strip=False, types=None)
 
@@ -19,10 +17,23 @@ onlySpans = [stripTags(item) for item in tableContent]
 setsOfcords = []
 
 for i in range(5, len(onlySpans), 3):
-    row = onlySpans[i:i + 3]
-    setsOfcords.append(row)
+    rows = onlySpans[i:i + 3]
+    setsOfcords.append(rows)
+
+currentX = setsOfcords[0][0]
+rowToprint = ""
+
+for i, row in enumerate(setsOfcords):
+    for j, element in enumerate(row):
+        if (j == 0):
+            if (currentX != setsOfcords[i][j]):
+                currentX = setsOfcords[i][j]
+                print(rowToprint + "\n")
+                rowToprint = ""
+
+        if (j == 1):
+            rowToprint += setsOfcords[i][j]        
 
 
-#Start at [5]
 
-print(setsOfcords)
+#print(setsOfcords[0][1])
