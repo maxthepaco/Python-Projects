@@ -7,8 +7,22 @@ html_content = response.text
 
 soup = BeautifulSoup(html_content, 'html5lib')
 
-tableContent = soup.find_all(class_='c0')
+tableContent = soup.select('p')
 
-del tableContent[0]
+#print(tableContent)
 
-print(tableContent[0])
+def stripTags(item):
+    return item.get_text(" ", strip=False, types=None)
+
+onlySpans = [stripTags(item) for item in tableContent]
+
+setsOfcords = []
+
+for i in range(5, len(onlySpans), 3):
+    row = onlySpans[i:i + 3]
+    setsOfcords.append(row)
+
+
+#Start at [5]
+
+print(setsOfcords)
